@@ -285,6 +285,157 @@
             box-shadow: 0 8px 30px rgba(0, 229, 255, 0.3);
         }
 
+        /* ===== LIQUID GRADIENT BUTTON (HESAPLA) ===== */
+        .liquid-btn {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            width: 160px;
+            height: 52px;
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 12px;
+            background: #000;
+            text-decoration: none;
+            overflow: visible;
+            cursor: pointer;
+            isolation: isolate;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .liquid-btn:hover {
+            transform: translateY(-2px);
+            border-color: #00E5FF;
+        }
+
+        .liquid-btn-glow {
+            position: absolute;
+            top: 8.5%;
+            left: 50%;
+            width: 113%;
+            height: 130%;
+            transform: translateX(-50%);
+            filter: blur(19px);
+            opacity: 0.7;
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .liquid-btn-inner {
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .liquid-orb {
+            position: absolute;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(14px);
+            will-change: transform;
+        }
+
+        .liquid-orb-1 {
+            top: -30%;
+            left: -10%;
+            width: 70%;
+            height: 180%;
+            background: radial-gradient(circle, #1E10C5 0%, #0017E9 35%, transparent 70%);
+            animation: liquidMove1 9s ease-in-out infinite;
+        }
+
+        .liquid-orb-2 {
+            top: -20%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, #4743EF 0%, #7D7BF4 40%, transparent 75%);
+            animation: liquidMove2 11s ease-in-out infinite;
+        }
+
+        .liquid-orb-3 {
+            bottom: -40%;
+            left: 30%;
+            width: 60%;
+            height: 180%;
+            background: radial-gradient(circle, #B6BAF6 0%, #9089E2 35%, transparent 70%);
+            animation: liquidMove3 13s ease-in-out infinite;
+        }
+
+        .liquid-orb-4 {
+            top: 20%;
+            left: 40%;
+            width: 50%;
+            height: 130%;
+            background: radial-gradient(circle, #ffffff 0%, #C5C1EA 30%, transparent 65%);
+            animation: liquidMove4 7s ease-in-out infinite;
+            mix-blend-mode: overlay;
+            opacity: 0.6;
+        }
+
+        @keyframes liquidMove1 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(40%, 10%) scale(1.2); }
+            66% { transform: translate(-15%, 25%) scale(0.85); }
+        }
+        @keyframes liquidMove2 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            40% { transform: translate(-30%, 15%) scale(1.15); }
+            75% { transform: translate(20%, -10%) scale(0.9); }
+        }
+        @keyframes liquidMove3 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            45% { transform: translate(20%, -25%) scale(1.25); }
+            70% { transform: translate(-25%, 5%) scale(0.95); }
+        }
+        @keyframes liquidMove4 {
+            0%,100% { transform: translate(0,0) scale(0.8); opacity: 0.4; }
+            50% { transform: translate(15%, 10%) scale(1.1); opacity: 0.7; }
+        }
+
+        .liquid-btn:hover .liquid-orb-1 { animation-duration: 4s; }
+        .liquid-btn:hover .liquid-orb-2 { animation-duration: 5s; }
+        .liquid-btn:hover .liquid-orb-3 { animation-duration: 6s; }
+        .liquid-btn:hover .liquid-orb-4 { animation-duration: 3s; }
+
+        .liquid-btn-label {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            height: 100%;
+            color: #ffffff;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            text-shadow: 0 0 12px rgba(0,229,255,0.4);
+        }
+
+        .liquid-btn:hover .liquid-btn-label {
+            color: #00E5FF;
+            text-shadow: 0 0 18px rgba(0,229,255,0.8);
+        }
+
+        .liquid-btn-icon {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.2;
+        }
+
+        @media (max-width: 768px) {
+            .liquid-btn { width: 130px; height: 44px; }
+            .liquid-btn-label { font-size: 0.8rem; }
+        }
+
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
@@ -1917,6 +2068,27 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="nav-cta-group" style="display:flex; align-items:center; gap:1rem;">
+        <a href="#quote-calculator" class="liquid-btn" data-magnetic aria-label="Hesapla — Mural Calculator">
+            <span class="liquid-btn-glow">
+                <span class="liquid-btn-inner">
+                    <span class="liquid-orb liquid-orb-1"></span>
+                    <span class="liquid-orb liquid-orb-2"></span>
+                    <span class="liquid-orb liquid-orb-3"></span>
+                    <span class="liquid-orb liquid-orb-4"></span>
+                </span>
+            </span>
+            <span class="liquid-btn-inner">
+                <span class="liquid-orb liquid-orb-1"></span>
+                <span class="liquid-orb liquid-orb-2"></span>
+                <span class="liquid-orb liquid-orb-3"></span>
+                <span class="liquid-orb liquid-orb-4"></span>
+            </span>
+            <span class="liquid-btn-label">
+                <svg class="liquid-btn-icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="13" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="13" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="13" y1="18" x2="16" y2="18"/></svg>
+                Hesapla
+            </span>
+        </a>
         <div class="wet-paint-btn">
             <a href="#contact" class="nav-cta">Get a Quote</a>
             <div class="drip drip--d1">
@@ -1956,6 +2128,7 @@
                 <div class="drip-droplet drip-droplet--primary"></div>
             </div>
         </div>
+        </div>
     </nav>
 
 
@@ -1979,12 +2152,6 @@
             <!-- Titles -->
             <h1 class="cosmos-title cosmos-title-top" id="cosmosTitleTop">WE BRING</h1>
             <h1 class="cosmos-title cosmos-title-bottom" id="cosmosTitleBottom"><span class="gradient-text">WALLS TO LIFE</span></h1>
-
-            <!-- Buttons -->
-            <div class="hero-buttons">
-                <a href="#portfolio" class="btn-primary">View Our Work</a>
-                <a href="#contact" class="btn-outline">Start a Project</a>
-            </div>
 
             <!-- Scroll indicator -->
             <div class="scroll-indicator">
