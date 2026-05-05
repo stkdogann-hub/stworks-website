@@ -774,11 +774,31 @@
             transition: transform 0.05s linear;
         }
 
+        /* Bottom title — vivid blue gradient with own glow shadow */
+        .cosmos-title-bottom {
+            text-shadow: none !important;
+            filter:
+                drop-shadow(2px 2px 0 rgba(13, 71, 161, 0.55))
+                drop-shadow(4px 4px 0 rgba(13, 71, 161, 0.4))
+                drop-shadow(0 12px 30px rgba(0, 229, 255, 0.5))
+                drop-shadow(0 0 60px rgba(33, 150, 243, 0.4));
+        }
+
         .cosmos-title-bottom .gradient-text {
-            background: var(--gradient-text);
+            background: linear-gradient(135deg, #7DF9FF 0%, #00E5FF 30%, #2196F3 65%, #82AEFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 900;
+        }
+
+        /* Top title — white with subtle blue rim */
+        .cosmos-title-top {
+            text-shadow:
+                0 2px 0 rgba(13, 71, 161, 0.4),
+                0 4px 0 rgba(13, 71, 161, 0.3),
+                0 6px 14px rgba(0, 0, 0, 0.45),
+                0 0 50px rgba(0, 229, 255, 0.25) !important;
         }
 
         .cosmos-hero .hero-buttons {
