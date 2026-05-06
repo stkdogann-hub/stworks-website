@@ -3481,14 +3481,10 @@
             document.body.appendChild(cursor);
             document.body.classList.add('has-magnetic-cursor');
 
-            const BASE_SIZE = 22;
             const LERP = 0.22;
 
             let tx = -100, ty = -100;
             let cx = -100, cy = -100;
-            let isHovering = false;
-            let activeEl = null;
-            let snapTargetX = 0, snapTargetY = 0;
             let rafId = null;
 
             window.addEventListener('pointermove', (e) => {
@@ -3500,64 +3496,14 @@
             document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
 
             function tick() {
-                if (isHovering) {
-                    cx += (snapTargetX - cx) * 0.25;
-                    cy += (snapTargetY - cy) * 0.25;
-                } else {
-                    cx += (tx - cx) * LERP;
-                    cy += (ty - cy) * LERP;
-                }
+                cx += (tx - cx) * LERP;
+                cy += (ty - cy) * LERP;
                 cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
                 rafId = requestAnimationFrame(tick);
             }
             rafId = requestAnimationFrame(tick);
 
-            function snapTo(el) {
-                const rect = el.getBoundingClientRect();
-                const cs = getComputedStyle(el);
-                snapTargetX = rect.left + rect.width/2;
-                snapTargetY = rect.top + rect.height/2;
-                cursor.classList.add('hovering');
-                cursor.style.width = (rect.width + 20) + 'px';
-                cursor.style.height = (rect.height + 20) + 'px';
-                cursor.style.borderRadius = cs.borderRadius || '12px';
-                cursor.style.background = 'rgba(0, 229, 255, 0.14)';
-                cursor.style.border = '1px solid rgba(0,229,255,0.5)';
-                cursor.style.mixBlendMode = 'normal';
-                cursor.style.transition = 'width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), border-radius 0.3s, background 0.3s, border 0.3s';
-            }
-
-            function release() {
-                cursor.classList.remove('hovering');
-                cursor.style.width = BASE_SIZE + 'px';
-                cursor.style.height = BASE_SIZE + 'px';
-                cursor.style.borderRadius = '50%';
-                cursor.style.background = '#ffffff';
-                cursor.style.border = 'none';
-                cursor.style.mixBlendMode = 'exclusion';
-            }
-
-            const magneticEls = document.querySelectorAll('[data-magnetic]');
-            magneticEls.forEach(el => {
-                el.addEventListener('pointerenter', () => {
-                    isHovering = true;
-                    activeEl = el;
-                    snapTo(el);
-                });
-                el.addEventListener('pointermove', (e) => {
-                    if (activeEl !== el) return;
-                    const rect = el.getBoundingClientRect();
-                    const ecx = rect.left + rect.width/2;
-                    const ecy = rect.top + rect.height/2;
-                    snapTargetX = ecx + (e.clientX - ecx) * 0.18;
-                    snapTargetY = ecy + (e.clientY - ecy) * 0.18;
-                });
-                el.addEventListener('pointerleave', () => {
-                    isHovering = false;
-                    activeEl = null;
-                    release();
-                });
-            });
+            // Magnetic snap removed — cursor just smoothly follows mouse
         })();
 
         // ===== PORTFOLIO FILTER =====
